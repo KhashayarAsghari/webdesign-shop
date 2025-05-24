@@ -1,178 +1,129 @@
 <!DOCTYPE html>
 <html lang="fa-IR" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./output.css" />
-    <script src="main.js" defer></script>
-    <link
-      rel="stylesheet"
-      href="./assets/fontawesome-free-6.7.2-web/css/all.min.css"
-    />
-  </head>
-  <body class="mb-28 md:mb-0">
-    <!-- header -->
-    <header>
-      <!-- mobile container -->
-      <div class="flex justify-between px-5 py-4 md:hidden">
-        <i
-          onclick="toggleSidebar()"
-          class="fa-solid fa-bars-staggered rotate-180 text-4xl"
-        ></i>
-        <i class="fa-solid fa-cart-shopping text-4xl"></i>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./output.css" />
+  <script src="main.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="./assets/fontawesome-free-6.7.2-web/css/all.min.css" />
+</head>
+
+<body class="mb-28 md:mb-0">
+  <!-- header -->
+  <header>
+    <!-- mobile container -->
+    <div class="flex justify-between px-5 py-4 md:hidden items-center">
+      <i onclick="toggleSidebar()" class="fa-solid fa-bars-staggered rotate-180 text-4xl"></i>
+      <i class="fa-solid fa-cart-shopping text-4xl"></i>
+    </div>
+
+    <div id="sidebar"
+      class="fixed h-[100vh] top-0 right-0 translate-x-full w-full backdrop-brightness-50 shadow-xl transition duration-[1s] z-10">
+      <i class="fa-solid fa-xmark fixed top-5 left-5 text-4xl text-white" onclick="toggleSidebar()"></i>
+      <div class="w-8/10 bg-white h-[100vh] p-5">
+        <ul class="flex flex-col gap-4">
+          <li>مردانه</li>
+          <li>زنانه</li>
+          <li>جواهرات</li>
+          <li>لوازم الکترونیکی</li>
+        </ul>
       </div>
+    </div>
 
-      <div
-        id="sidebar"
-        class="fixed h-[100vh] top-0 right-0 translate-x-full w-full backdrop-brightness-50 shadow-xl transition duration-[1s] z-10"
-      >
-        <i
-          class="fa-solid fa-xmark fixed top-5 left-5 text-4xl text-white"
-          onclick="toggleSidebar()"
-        ></i>
-        <div class="w-8/10 bg-white h-[100vh] p-5">
-          <ul class="flex flex-col gap-4">
-            <li>مردانه</li>
-            <li>زنانه</li>
-            <li>جواهرات</li>
-            <li>لوازم الکترونیکی</li>
-          </ul>
-        </div>
-      </div>
+    <!-- desktop container -->
+    <div id="desktop_header" class="hidden md:flex justify-between gap-1 py-5 custom-container">
+      <img class="w-50 h-12 object-contain" src="./assets/images/logo.svg" width="200" height="50" alt="logo" />
 
-      <!-- desktop container -->
-      <div class="hidden md:flex justify-between gap-1 py-5 custom-container">
-        <img
-          class="w-50 h-12 object-contain"
-          src="./assets/images/logo.svg"
-          width="200"
-          height="50"
-          alt="logo"
-        />
+      <nav>
+        <ul class="flex gap-5">
+          <li class="group relative">
+            پوشاک
+            <div
+              class="hidden group-hover:block p-5 absolute top-full left-0 w-[600px] bg-slate-200 shadow-lg rounded-lg">
+              <div class="flex justify-between items-start">
+                <ul>
+                  <li>مردانه</li>
+                  <li>زنانه</li>
+                </ul>
 
-        <nav>
-          <ul class="flex gap-5">
-            <li class="group relative">
-              پوشاک
-              <div
-                class="hidden group-hover:block p-5 absolute top-full left-0 w-[600px] bg-slate-200 shadow-lg rounded-lg"
-              >
-                <div class="flex justify-between items-start">
-                  <ul>
-                    <li>مردانه</li>
-                    <li>زنانه</li>
-                  </ul>
-
-                  <img
-                    class="w-50 h-[500px] object-contain"
-                    src="./assets/images/categories/dresses/dresses.jpg"
-                    width="200"
-                    height="500"
-                    alt=""
-                  />
-                </div>
+                <img class="w-50 h-[500px] object-contain" src="./assets/images/categories/dresses/dresses.jpg"
+                  width="200" height="500" alt="" />
               </div>
-            </li>
-            <li>جواهرات</li>
-            <li>لوازم الکترونیکی</li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+            </div>
+          </li>
+          <li id="test">جواهرات</li>
+          <li>لوازم الکترونیکی</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- slider -->
-    <div class="h-[50vh] custom-container-lg">
-      <img
-        class="h-[50vh] w-full object-cover"
-        src="./assets/images/slider/1.jpg"
-        width="500"
-        height="800"
-        alt=""
-      />
+  <!-- slider -->
+  <div class="h-[50vh] custom-container-lg">
+    <img class="h-[50vh] w-full object-cover" src="./assets/images/slider/1.jpg" width="500" height="800" alt="" />
+  </div>
+
+  <!-- categories -->
+  <div class="flex flex-col md:flex-row custom-container-lg">
+    <div class="relative flex-1">
+      <img class="w-full aspect-square object-cover" src="./assets/images/categories/women.jpg" alt="" />
+      <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">پوشاک زنانه</span>
+    </div>
+    <div class="relative flex-1">
+      <img class="w-full aspect-square object-cover" src="./assets/images/categories/men.jpg" alt="" />
+      <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">پوشاک مردانه</span>
     </div>
 
-    <!-- categories -->
-    <div class="flex flex-col md:flex-row custom-container-lg">
-      <div class="relative flex-1">
-        <img
-          class="w-full aspect-square object-cover"
-          src="./assets/images/categories/women.jpg"
-          alt=""
-        />
-        <span
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl"
-          >پوشاک زنانه</span
-        >
-      </div>
-      <div class="relative flex-1">
-        <img
-          class="w-full aspect-square object-cover"
-          src="./assets/images/categories/men.jpg"
-          alt=""
-        />
-        <span
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl"
-          >پوشاک مردانه</span
-        >
-      </div>
+    <div class="relative flex-1">
+      <img class="w-full aspect-square object-cover brightness-50" src="./assets/images/categories/electronics.jpg"
+        alt="" />
+      <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">لوازم
+        الکترونیکی</span>
+    </div>
+    <div class="relative flex-1">
+      <img class="w-full aspect-square object-cover brightness-50" src="./assets/images/categories/jewelry.jpg"
+        alt="" />
+      <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">جواهرات</span>
+    </div>
+  </div>
 
-      <div class="relative flex-1">
-        <img
-          class="w-full aspect-square object-cover brightness-50"
-          src="./assets/images/categories/electronics.jpg"
-          alt=""
-        />
-        <span
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl"
-          >لوازم الکترونیکی</span
-        >
-      </div>
-      <div class="relative flex-1">
-        <img
-          class="w-full aspect-square object-cover brightness-50"
-          src="./assets/images/categories/jewelry.jpg"
-          alt=""
-        />
-        <span
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl"
-          >جواهرات</span
-        >
-      </div>
+  <!-- jewelry container -->
+  <h2 class="text-center mt-10">جواهرات</h2>
+  <div id="jewelry-container" class="custom-container md:flex justify-center gap-4"></div>
+
+  <!-- bottom navigation bar -->
+  <div
+    class="fixed bottom-0 left-0 w-full p-2 flex justify-between items-center px-5 py-4 shadow-lg border-t border-slate-200 md:hidden bg-white">
+    <div class="flex flex-col items-center">
+      <i class="fa-solid fa-house text-2xl"></i>
+      <span>خانه</span>
     </div>
 
-    <!-- jewelry container -->
-    <h2 class="text-center mt-10">جواهرات</h2>
-    <div id="jewelry-container" class="custom-container md:flex gap-4"></div>
-
-    <!-- bottom navigation bar -->
-    <div
-      class="fixed bottom-0 left-0 w-full p-2 flex justify-between items-center px-5 py-4 shadow-lg border-t border-slate-200 md:hidden bg-white"
-    >
-      <div class="flex flex-col items-center">
-        <i class="fa-solid fa-house text-2xl"></i>
-        <span>خانه</span>
-      </div>
-
-      <div class="flex flex-col items-center">
-        <i class="fa-solid fa-shop text-2xl"></i>
-        <span>محصولات</span>
-      </div>
-
-      <div class="flex flex-col items-center">
-        <i class="fa-solid fa-heart text-2xl"></i>
-        <span>علاقمندی‌ها</span>
-      </div>
-
-      <div class="flex flex-col items-center">
-        <i class="fa-solid fa-user text-2xl"></i>
-        <span>حساب کاربری</span>
-      </div>
-
-      <div class="flex flex-col items-center">
-        <i class="fa-solid fa-cart-shopping text-2xl"></i>
-        <span>سبد خرید</span>
-      </div>
+    <div class="flex flex-col items-center">
+      <i class="fa-solid fa-shop text-2xl"></i>
+      <span>محصولات</span>
     </div>
-  </body>
+
+    <div class="flex flex-col items-center">
+      <i class="fa-solid fa-heart text-2xl"></i>
+      <span>علاقمندی‌ها</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <i class="fa-solid fa-user text-2xl"></i>
+      <span>حساب کاربری</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <i class="fa-solid fa-cart-shopping text-2xl"></i>
+      <span>سبد خرید</span>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
 </html>
