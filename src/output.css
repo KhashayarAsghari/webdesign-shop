@@ -307,12 +307,6 @@
   .max-w-64 {
     max-width: calc(var(--spacing) * 64);
   }
-  .max-w-80 {
-    max-width: calc(var(--spacing) * 80);
-  }
-  .max-w-96 {
-    max-width: calc(var(--spacing) * 96);
-  }
   .flex-1 {
     flex: 1;
   }
@@ -365,6 +359,9 @@
   }
   .resize {
     resize: both;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -516,6 +513,11 @@
   .md\:hidden {
     @media (width >= 48rem) {
       display: none;
+    }
+  }
+  .md\:grid-cols-4 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .md\:flex-row {

@@ -1,5 +1,6 @@
 const mobileMenu = document.getElementById("sidebar");
 const desktopHeader = document.getElementById("desktop_header")
+const root = document.getElementById("root")
 // const test = document.getElementById("test")
 
 // const tst = Toastify({
@@ -27,6 +28,22 @@ const desktopHeader = document.getElementById("desktop_header")
 
 // test.addEventListener("click", handleTest)
 
+const errorToast = Toastify({
+  text: "دریافت دیتا با خطا مواجه شد!",
+  duration: 3000,
+  // destination: "https://github.com/apvarun/toastify-js",
+  // newWindow: true,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "center", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #ff5555, #ff0000)",
+  },
+  onClick: function () {
+    location.reload()
+  } // Callback after click
+})
 
 function toggleSidebar() {
   mobileMenu.classList.toggle("translate-x-full");
@@ -36,23 +53,18 @@ fetch("https://fakestoreapi.com/products/category/jewelery")
   .then((res) => res.json())
   .then((json) => renderMainPageJewelry(json))
   .catch((err) => {
-    Toastify({
-      text: "دریافت دیتا با خطا مواجه شد!",
-      duration: 3000,
-      // destination: "https://github.com/apvarun/toastify-js",
-      // newWindow: true,
-      close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
-      style: {
-        background: "linear-gradient(to right, #ff5555, #ff0000)",
-      },
-      onClick: function () {
-        location.reload()
-      } // Callback after click
-    }).showToast();
+    errorToast.showToast();
   });
+
+function handleAClick(evt) {
+  evt.preventDefault();
+
+  const href = evt.target.getAttribute("href")
+
+  history.pushState({}, "", href)
+
+  checkState()
+}
 
 function renderMainPageJewelry(items) {
   const container = document.getElementById("jewelry-container");
@@ -85,6 +97,49 @@ function handleWindowScroll(evt) {
   } else {
     desktopHeader.style = ""
   }
+}
+
+function renderMenPage() {
+  root.innerHTML = "<h1>LOADING....</h1>"
+
+  fetch("https://fakestoreapi.com/prsdoducts/category/men's%20clothing")
+    .then(res => res.json())
+    .then(json => renderMenData(json))
+    .catch(err => errorToast.showToast())
+
+  function renderMenData(data) {
+    const template = data.map(item => {
+      return `
+      <div class="w-full max-w-64">
+      <img
+        class="w-full aspect-[3/4] object-contain"
+        src="${item.image}"
+        alt=""
+      />
+
+      <h3>${item.title}</h3>
+      <span>${item.price} تومان</span>
+    </div>
+      `
+    }).join("");
+
+    const container = `
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 custom-container">
+        ${template}
+      </div>
+    `
+
+    root.innerHTML = container
+  }
+}
+
+function checkState() {
+  const url = location.pathname;
+
+  if (url === "/men") {
+    renderMenPage()
+  }
+
 }
 
 window.addEventListener("scroll", handleWindowScroll)
