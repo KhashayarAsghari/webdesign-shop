@@ -100,9 +100,28 @@ function handleWindowScroll(evt) {
 }
 
 function renderMenPage() {
-  root.innerHTML = "<h1>LOADING....</h1>"
+  root.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-4 gap-4"><div class="w-full h-96 p-4 bg-slate-200 animate-pulse">
+  <div class="w-full bg-slate-300 h-64"></div>
+  <div class="w-1/3 h-6 bg-slate-300 rounded-lg mt-4"></div>
+  <div class="w-1/5 h-6 bg-slate-300 rounded-lg mt-4"></div>
+</div>
+<div class="w-full h-96 p-4 bg-slate-200 animate-pulse">
+  <div class="w-full bg-slate-300 h-64"></div>
+  <div class="w-1/3 h-6 bg-slate-300 rounded-lg mt-4"></div>
+  <div class="w-1/5 h-6 bg-slate-300 rounded-lg mt-4"></div>
+</div>
+<div class="w-full h-96 p-4 bg-slate-200 animate-pulse">
+  <div class="w-full bg-slate-300 h-64"></div>
+  <div class="w-1/3 h-6 bg-slate-300 rounded-lg mt-4"></div>
+  <div class="w-1/5 h-6 bg-slate-300 rounded-lg mt-4"></div>
+</div>
+<div class="w-full h-96 p-4 bg-slate-200 animate-pulse">
+  <div class="w-full bg-slate-300 h-64"></div>
+  <div class="w-1/3 h-6 bg-slate-300 rounded-lg mt-4"></div>
+  <div class="w-1/5 h-6 bg-slate-300 rounded-lg mt-4"></div>
+</div></div>`
 
-  fetch("https://fakestoreapi.com/prsdoducts/category/men's%20clothing")
+  fetch("https://fakestoreapi.com/products/category/men's%20clothing")
     .then(res => res.json())
     .then(json => renderMenData(json))
     .catch(err => errorToast.showToast())
@@ -133,13 +152,57 @@ function renderMenPage() {
   }
 }
 
+function renderMainPage() {
+    const template = `<!-- slider -->
+    <div class="h-[50vh] custom-container-lg">
+      <img class="h-[50vh] w-full object-cover" src="./assets/images/slider/1.jpg" width="500" height="800" alt="" />
+    </div>
+
+    <!-- categories -->
+    <div class="flex flex-col md:flex-row custom-container-lg">
+      <div class="relative flex-1">
+        <img class="w-full aspect-square object-cover" src="./assets/images/categories/women.jpg" alt="" />
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">پوشاک زنانه</span>
+      </div>
+      <div class="relative flex-1">
+        <img class="w-full aspect-square object-cover" src="./assets/images/categories/men.jpg" alt="" />
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">پوشاک
+          مردانه</span>
+      </div>
+
+      <div class="relative flex-1">
+        <img class="w-full aspect-square object-cover brightness-50" src="./assets/images/categories/electronics.jpg"
+          alt="" />
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">لوازم
+          الکترونیکی</span>
+      </div>
+      <div class="relative flex-1">
+        <img class="w-full aspect-square object-cover brightness-50" src="./assets/images/categories/jewelry.jpg"
+          alt="" />
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-2xl">جواهرات</span>
+      </div>
+    </div>
+
+    <!-- jewelry container -->
+    <h2 class="text-center mt-10">جواهرات</h2>
+    <div id="jewelry-container" class="custom-container md:flex justify-center gap-4"></div>
+`
+
+root.innerHTML = template;
+
+  renderMainPageJewelry()
+}
+
 function checkState() {
   const url = location.pathname;
 
   if (url === "/men") {
     renderMenPage()
+  } else {
+    renderMainPage()
   }
 
 }
 
+window.addEventListener("popstate", checkState)
 window.addEventListener("scroll", handleWindowScroll)
